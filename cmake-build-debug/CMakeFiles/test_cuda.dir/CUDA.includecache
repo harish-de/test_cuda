@@ -1,0 +1,16 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/harish/CLionProjects/test_cuda/main.cu
+thrust/host_vector.h
+-
+thrust/device_vector.h
+-
+iostream
+-
+
