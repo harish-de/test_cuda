@@ -11,8 +11,6 @@
 #include <sstream>
 #include<algorithm>
 
-#define DSIZE 10
-
 int main(void)
 {
 
