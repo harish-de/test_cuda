@@ -10,6 +10,7 @@ set(CMAKE_CUDA_COMPILER_ID "NVIDIA")
 
 # The include file search paths:
 set(CMAKE_CUDA_TARGET_INCLUDE_PATH
+  "/opt/arrayfire-3/include"
   )
 
 # Targets to which this target links.

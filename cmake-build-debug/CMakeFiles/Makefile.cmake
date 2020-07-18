@@ -22,6 +22,16 @@ set(CMAKE_MAKEFILE_DEPENDS
   "/home/harish/Downloads/clion-2020.1.2/bin/cmake/linux/share/cmake-3.16/Modules/Platform/Linux.cmake"
   "/home/harish/Downloads/clion-2020.1.2/bin/cmake/linux/share/cmake-3.16/Modules/Platform/UnixPaths.cmake"
   "/home/harish/Downloads/clion-2020.1.2/bin/cmake/linux/share/cmake-3.16/Modules/ProcessorCount.cmake"
+  "/opt/arrayfire-3/share/ArrayFire/cmake/ArrayFireCPU-relwithdebinfo.cmake"
+  "/opt/arrayfire-3/share/ArrayFire/cmake/ArrayFireCPU.cmake"
+  "/opt/arrayfire-3/share/ArrayFire/cmake/ArrayFireCUDA-relwithdebinfo.cmake"
+  "/opt/arrayfire-3/share/ArrayFire/cmake/ArrayFireCUDA.cmake"
+  "/opt/arrayfire-3/share/ArrayFire/cmake/ArrayFireConfig.cmake"
+  "/opt/arrayfire-3/share/ArrayFire/cmake/ArrayFireConfigVersion.cmake"
+  "/opt/arrayfire-3/share/ArrayFire/cmake/ArrayFireOpenCL-relwithdebinfo.cmake"
+  "/opt/arrayfire-3/share/ArrayFire/cmake/ArrayFireOpenCL.cmake"
+  "/opt/arrayfire-3/share/ArrayFire/cmake/ArrayFireUnified-relwithdebinfo.cmake"
+  "/opt/arrayfire-3/share/ArrayFire/cmake/ArrayFireUnified.cmake"
   )
 
 # The corresponding makefile is:

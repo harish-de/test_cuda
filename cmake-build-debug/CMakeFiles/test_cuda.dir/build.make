@@ -79,6 +79,7 @@ test_cuda_EXTERNAL_OBJECTS =
 
 CMakeFiles/test_cuda.dir/cmake_device_link.o: CMakeFiles/test_cuda.dir/main.cu.o
 CMakeFiles/test_cuda.dir/cmake_device_link.o: CMakeFiles/test_cuda.dir/build.make
+CMakeFiles/test_cuda.dir/cmake_device_link.o: /opt/arrayfire-3/lib/libaf.so.3.5.0
 CMakeFiles/test_cuda.dir/cmake_device_link.o: CMakeFiles/test_cuda.dir/dlink.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/harish/CLionProjects/test_cuda/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CUDA device code CMakeFiles/test_cuda.dir/cmake_device_link.o"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/test_cuda.dir/dlink.txt --verbose=$(VERBOSE)
@@ -97,6 +98,7 @@ test_cuda_EXTERNAL_OBJECTS =
 
 test_cuda: CMakeFiles/test_cuda.dir/main.cu.o
 test_cuda: CMakeFiles/test_cuda.dir/build.make
+test_cuda: /opt/arrayfire-3/lib/libaf.so.3.5.0
 test_cuda: CMakeFiles/test_cuda.dir/cmake_device_link.o
 test_cuda: CMakeFiles/test_cuda.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/harish/CLionProjects/test_cuda/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CUDA executable test_cuda"

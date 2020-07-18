@@ -5,7 +5,7 @@
 		<Option title="test_cuda"/>
 		<Option makefile_is_custom="1"/>
 		<Option compiler="gcc"/>
-		<Option virtualFolders="CMake Files\;"/>
+		<Option virtualFolders="CMake Files\;CMake Files\..\;CMake Files\..\..\;CMake Files\..\..\..\;CMake Files\..\..\..\..\;CMake Files\..\..\..\..\opt\;CMake Files\..\..\..\..\opt\arrayfire-3\;CMake Files\..\..\..\..\opt\arrayfire-3\share\;CMake Files\..\..\..\..\opt\arrayfire-3\share\ArrayFire\;CMake Files\..\..\..\..\opt\arrayfire-3\share\ArrayFire\cmake\;"/>
 		<Build>
 			<Target title="all">
 				<Option working_dir="/home/harish/CLionProjects/test_cuda/cmake-build-debug"/>
@@ -43,7 +43,9 @@
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
-				<Compiler/>
+				<Compiler>
+					<Add directory="/opt/arrayfire-3/include"/>
+				</Compiler>
 				<MakeCommands>
 					<Build command="/usr/bin/make -j6 -f &quot;/home/harish/CLionProjects/test_cuda/cmake-build-debug/Makefile&quot;  VERBOSE=1 test_cuda"/>
 					<CompileFile command="/usr/bin/make -j6 -f &quot;/home/harish/CLionProjects/test_cuda/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
@@ -57,7 +59,9 @@
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
-				<Compiler/>
+				<Compiler>
+					<Add directory="/opt/arrayfire-3/include"/>
+				</Compiler>
 				<MakeCommands>
 					<Build command="/usr/bin/make -j6 -f &quot;/home/harish/CLionProjects/test_cuda/cmake-build-debug/Makefile&quot;  VERBOSE=1 test_cuda/fast"/>
 					<CompileFile command="/usr/bin/make -j6 -f &quot;/home/harish/CLionProjects/test_cuda/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
@@ -71,6 +75,36 @@
 		</Unit>
 		<Unit filename="/home/harish/CLionProjects/test_cuda/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+		<Unit filename="/home/harish/CLionProjects/test_cuda/../../../../opt/arrayfire-3/share/ArrayFire/cmake/ArrayFireCPU-relwithdebinfo.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\opt\arrayfire-3\share\ArrayFire\cmake\"/>
+		</Unit>
+		<Unit filename="/home/harish/CLionProjects/test_cuda/../../../../opt/arrayfire-3/share/ArrayFire/cmake/ArrayFireCPU.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\opt\arrayfire-3\share\ArrayFire\cmake\"/>
+		</Unit>
+		<Unit filename="/home/harish/CLionProjects/test_cuda/../../../../opt/arrayfire-3/share/ArrayFire/cmake/ArrayFireCUDA-relwithdebinfo.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\opt\arrayfire-3\share\ArrayFire\cmake\"/>
+		</Unit>
+		<Unit filename="/home/harish/CLionProjects/test_cuda/../../../../opt/arrayfire-3/share/ArrayFire/cmake/ArrayFireCUDA.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\opt\arrayfire-3\share\ArrayFire\cmake\"/>
+		</Unit>
+		<Unit filename="/home/harish/CLionProjects/test_cuda/../../../../opt/arrayfire-3/share/ArrayFire/cmake/ArrayFireConfig.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\opt\arrayfire-3\share\ArrayFire\cmake\"/>
+		</Unit>
+		<Unit filename="/home/harish/CLionProjects/test_cuda/../../../../opt/arrayfire-3/share/ArrayFire/cmake/ArrayFireConfigVersion.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\opt\arrayfire-3\share\ArrayFire\cmake\"/>
+		</Unit>
+		<Unit filename="/home/harish/CLionProjects/test_cuda/../../../../opt/arrayfire-3/share/ArrayFire/cmake/ArrayFireOpenCL-relwithdebinfo.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\opt\arrayfire-3\share\ArrayFire\cmake\"/>
+		</Unit>
+		<Unit filename="/home/harish/CLionProjects/test_cuda/../../../../opt/arrayfire-3/share/ArrayFire/cmake/ArrayFireOpenCL.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\opt\arrayfire-3\share\ArrayFire\cmake\"/>
+		</Unit>
+		<Unit filename="/home/harish/CLionProjects/test_cuda/../../../../opt/arrayfire-3/share/ArrayFire/cmake/ArrayFireUnified-relwithdebinfo.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\opt\arrayfire-3\share\ArrayFire\cmake\"/>
+		</Unit>
+		<Unit filename="/home/harish/CLionProjects/test_cuda/../../../../opt/arrayfire-3/share/ArrayFire/cmake/ArrayFireUnified.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\opt\arrayfire-3\share\ArrayFire\cmake\"/>
 		</Unit>
 	</Project>
 </CodeBlocks_project_file>
