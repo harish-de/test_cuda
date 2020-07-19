@@ -7,7 +7,7 @@ set(CMAKE_CUDA_STANDARD 14)
 FIND_PACKAGE(ArrayFire REQUIRED)
 INCLUDE_DIRECTORIES(${ArrayFire_INCLUDE_DIRS})
 
-add_executable(test_cuda main.cu)
+add_executable(test_cuda main.cu filter_arrayfire.cu)
 
 TARGET_LINK_LIBRARIES(test_cuda ${ArrayFire_LIBRARIES})
 

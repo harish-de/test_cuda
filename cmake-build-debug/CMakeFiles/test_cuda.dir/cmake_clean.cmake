@@ -1,5 +1,6 @@
 file(REMOVE_RECURSE
   "CMakeFiles/test_cuda.dir/cmake_device_link.o"
+  "CMakeFiles/test_cuda.dir/filter_arrayfire.cu.o"
   "CMakeFiles/test_cuda.dir/main.cu.o"
   "test_cuda"
   "test_cuda.pdb"

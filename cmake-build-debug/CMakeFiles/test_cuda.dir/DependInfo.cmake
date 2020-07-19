@@ -4,6 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CUDA
+  "/home/harish/CLionProjects/test_cuda/filter_arrayfire.cu" "/home/harish/CLionProjects/test_cuda/cmake-build-debug/CMakeFiles/test_cuda.dir/filter_arrayfire.cu.o"
   "/home/harish/CLionProjects/test_cuda/main.cu" "/home/harish/CLionProjects/test_cuda/cmake-build-debug/CMakeFiles/test_cuda.dir/main.cu.o"
   )
 set(CMAKE_CUDA_COMPILER_ID "NVIDIA")

@@ -70,6 +70,9 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/home/harish/CLionProjects/test_cuda/filter_arrayfire.cu">
+			<Option target="test_cuda"/>
+		</Unit>
 		<Unit filename="/home/harish/CLionProjects/test_cuda/main.cu">
 			<Option target="test_cuda"/>
 		</Unit>

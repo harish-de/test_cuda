@@ -123,6 +123,33 @@ test_cuda/fast:
 	$(MAKE) -f CMakeFiles/test_cuda.dir/build.make CMakeFiles/test_cuda.dir/build
 .PHONY : test_cuda/fast
 
+filter_arrayfire.o: filter_arrayfire.cu.o
+
+.PHONY : filter_arrayfire.o
+
+# target to build an object file
+filter_arrayfire.cu.o:
+	$(MAKE) -f CMakeFiles/test_cuda.dir/build.make CMakeFiles/test_cuda.dir/filter_arrayfire.cu.o
+.PHONY : filter_arrayfire.cu.o
+
+filter_arrayfire.i: filter_arrayfire.cu.i
+
+.PHONY : filter_arrayfire.i
+
+# target to preprocess a source file
+filter_arrayfire.cu.i:
+	$(MAKE) -f CMakeFiles/test_cuda.dir/build.make CMakeFiles/test_cuda.dir/filter_arrayfire.cu.i
+.PHONY : filter_arrayfire.cu.i
+
+filter_arrayfire.s: filter_arrayfire.cu.s
+
+.PHONY : filter_arrayfire.s
+
+# target to generate assembly for a file
+filter_arrayfire.cu.s:
+	$(MAKE) -f CMakeFiles/test_cuda.dir/build.make CMakeFiles/test_cuda.dir/filter_arrayfire.cu.s
+.PHONY : filter_arrayfire.cu.s
+
 main.o: main.cu.o
 
 .PHONY : main.o
@@ -159,6 +186,9 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... test_cuda"
+	@echo "... filter_arrayfire.o"
+	@echo "... filter_arrayfire.i"
+	@echo "... filter_arrayfire.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
