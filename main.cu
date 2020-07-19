@@ -1,3 +1,6 @@
+//
+// Created by harish on 17.07.20.
+//
 #include <thrust/host_vector.h>
 #include <thrust/device_vector.h>
 #include <thrust/remove.h>
@@ -8,6 +11,7 @@
 #include <arrayfire.h>
 #include <af/array.h>
 
+
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -16,6 +20,8 @@
 // forward declarations
 std::vector<std::vector<int>> getLineItemData();
 void filter_thrust();
+
+std::vector<std::vector<int>> getTransposedVector(const std::vector<std::vector<int>> &lineitemData);
 
 void testBackend()
 {
@@ -69,10 +75,34 @@ void testArrayFire()
     // be freed when `b` id destructed. Do not call cudaFree(device_ptr)!
 }
 
+void filter_arrayfire(){
+
+    // get the table content as 2D vector
+    std::vector<std::vector<int>> lineitemData;
+    lineitemData = getLineItemData();
+
+    // transpose the table data to read in column format
+    std::vector<std::vector<int>> transposedVec = getTransposedVector(lineitemData);
+
+    std::cout << transposedVec.size() << std::endl;
+    std::cout << transposedVec[8].size() << std::endl;
+
+//    std::vector<int> temp = transposedVec[0];
+    int* lineitem_date = &transposedVec[8][0]; //&temp[0];
+
+    // copy host data to device
+    af::array deviceDate((dim_t)6001215, lineitem_date);
+
+//    af::array result = af::operator>>(deviceDate, 19940101);
+    af::array index = af::where(af::operator>(deviceDate, 19940101));
+    af::print("result", index);
+}
+
 
 int main(void)
 {
-    filter_thrust();
+//    filter_thrust();
+    filter_arrayfire();
     return 0;
 }
 
@@ -87,11 +117,7 @@ void filter_thrust() {// this following check confirmed addition of --expt-exten
     lineitemData = getLineItemData();
 
     // transpose the table data to read in column format
-    std::vector<std::vector<int>> transposedVec(lineitemData[0].size(),
-                                    std::vector<int>(lineitemData.size()));
-    for (size_t i = 0; i < lineitemData.size(); ++i)
-        for (size_t j = 0; j < lineitemData[0].size(); ++j)
-            transposedVec[j][i] = lineitemData[i][j];
+    std::vector<std::vector<int>> transposedVec = getTransposedVector(lineitemData);
 
     // the table data in column format is host vector H
     thrust::host_vector<std::vector<int>> H(transposedVec);
@@ -134,6 +160,15 @@ void filter_thrust() {// this following check confirmed addition of --expt-exten
     iter = thrust::find_if(thrust::device, D0.begin(), D0.end(), [=] __device__(const int x) {
         return !(x >= 19940101 and x < 19950101);
     });*/}
+
+std::vector<std::vector<int>> getTransposedVector(const std::vector<std::vector<int>> &lineitemData) {
+    std::vector<std::vector<int>> transposedVec(lineitemData[0].size(),
+                                                std::vector<int>(lineitemData.size()));
+    for (size_t i = 0; i < lineitemData.size(); ++i)
+        for (size_t j = 0; j < lineitemData[0].size(); ++j)
+            transposedVec[j][i] = lineitemData[i][j];
+    return transposedVec;
+}
 
 
 std::vector<std::vector<int>> getLineItemData() {
