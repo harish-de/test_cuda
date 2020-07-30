@@ -6,30 +6,14 @@
 
 #IncludeRegexTransform: 
 
-/home/harish/CLionProjects/test_cuda/main.cu
-thrust/host_vector.h
--
-thrust/device_vector.h
--
-thrust/remove.h
--
-thrust/copy.h
--
-thrust/execution_policy.h
--
-thrust/find.h
--
-arrayfire.h
+/home/harish/CLionProjects/test_cuda/arrayfireops.cu
+vector
 -
 af/array.h
 -
-iostream
+arrayfire.h
 -
-fstream
--
-sstream
--
-algorithm
+af/algorithm.h
 -
 
 /opt/arrayfire-3/include/af/algorithm.h

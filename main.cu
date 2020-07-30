@@ -1,27 +1,92 @@
 //
 // Created by harish on 17.07.20.
 //
+
+// Begin of Thrust libraries
 #include <thrust/host_vector.h>
 #include <thrust/device_vector.h>
 #include <thrust/remove.h>
 #include <thrust/copy.h>
 #include <thrust/execution_policy.h>
 #include <thrust/find.h>
+// End of Thrust libraries
 
+// Begin of Arrayfire libraries
 #include <arrayfire.h>
 #include <af/array.h>
+// End of Arrayfire libraries
 
+//#include <cudf.h> //installed using command "sudo apt-get install libcudf-dev"
 
+// Begin of STL libraries
 #include <iostream>
 #include <fstream>
 #include <sstream>
 #include<algorithm>
+#include <array>
+// End of STL libraries
 
-// forward declarations
-std::vector<std::vector<int>> getLineItemData();
-void filter_thrust();
+#include "arrayfireops.h"
 
-std::vector<std::vector<int>> getTransposedVector(const std::vector<std::vector<int>> &lineitemData);
+//***************************************************************************************************//
+//*************** READ TABLE DATA FROM .TBL FILES ***************************************************//
+//***************************************************************************************************//
+std::vector<std::vector<int>> getLineItemData() {
+    std::string filename = "/home/harish/Documents/lineitem/lineitem.tbl";
+
+    std::vector<std::vector<int>> lineitemData;
+
+    std::vector<int> rowVector;
+
+    std::ifstream lineitemFile(filename);
+
+/*    if(!lineitemFile.is_open())
+        throw std::runtime_error("could not open file");*/
+
+    std::string row;
+    std::string values;
+
+    while (lineitemFile.good()) {
+        std::getline(lineitemFile, row);
+        std::stringstream ss(row);
+        int count = 0;
+        while (std::getline(ss,values,'|')){
+            if(count < 8 or (count >=10 and count <=12)){
+                if(count >= 4 and count <=7) {
+                    int val = std::stof(values) * 100;
+                    rowVector.push_back(val);
+                }
+                else if(count >=10 and count <=12){
+                    values.erase(remove(values.begin(), values.end(), '-'), values.end());
+                    rowVector.push_back(std::stoi(values));
+                }
+                else{
+                    rowVector.push_back(std::stoi(values));
+                }
+            }
+            count++;
+        }
+        lineitemData.push_back(rowVector);
+        rowVector.clear();
+    }
+    return lineitemData;
+}
+
+//***************************************************************************************************//
+//*************** TRANSPOSE TABLE DATA FOR COLUMN FORMAT TO LOAD INTO DEVICE ************************//
+//***************************************************************************************************//
+std::vector<std::vector<int>> getTransposedVector(const std::vector<std::vector<int>> &lineitemData) {
+    std::vector<std::vector<int>> transposedVec(lineitemData[0].size(),
+                                                std::vector<int>(lineitemData.size()));
+    for (size_t i = 0; i < lineitemData.size(); ++i)
+        for (size_t j = 0; j < lineitemData[0].size(); ++j)
+            transposedVec[j][i] = lineitemData[i][j];
+    return transposedVec;
+}
+
+//***************************************************************************************************//
+//*************** ARRAYFIRE - HOW TO SET DIFFERENT BACKENDS *****************************************//
+//***************************************************************************************************//
 
 void testBackend()
 {
@@ -75,36 +140,9 @@ void testArrayFire()
     // be freed when `b` id destructed. Do not call cudaFree(device_ptr)!
 }
 
-void filter_arrayfire(){
-
-    // get the table content as 2D vector
-    std::vector<std::vector<int>> lineitemData;
-    lineitemData = getLineItemData();
-
-    // transpose the table data to read in column format
-    std::vector<std::vector<int>> transposedVec = getTransposedVector(lineitemData);
-
-    std::cout << transposedVec.size() << std::endl;
-    std::cout << transposedVec[8].size() << std::endl;
-
-//    std::vector<int> temp = transposedVec[0];
-    int* lineitem_date = &transposedVec[8][0]; //&temp[0];
-
-    // copy host data to device
-    af::array deviceDate((dim_t)6001215, lineitem_date);
-
-//    af::array result = af::operator>>(deviceDate, 19940101);
-    af::array index = af::where(af::operator>(deviceDate, 19940101));
-    af::print("result", index);
-}
-
-
-int main(void)
-{
-//    filter_thrust();
-    filter_arrayfire();
-    return 0;
-}
+//***************************************************************************************************//
+//*************** THRUST - FILTER OPERATION *********************************************************//
+//***************************************************************************************************//
 
 void filter_thrust() {// this following check confirmed addition of --expt-extended-lambda in CmakeLists.txt
 // is necessary to executed lambda functions
@@ -161,56 +199,28 @@ void filter_thrust() {// this following check confirmed addition of --expt-exten
         return !(x >= 19940101 and x < 19950101);
     });*/}
 
-std::vector<std::vector<int>> getTransposedVector(const std::vector<std::vector<int>> &lineitemData) {
-    std::vector<std::vector<int>> transposedVec(lineitemData[0].size(),
-                                                std::vector<int>(lineitemData.size()));
-    for (size_t i = 0; i < lineitemData.size(); ++i)
-        for (size_t j = 0; j < lineitemData[0].size(); ++j)
-            transposedVec[j][i] = lineitemData[i][j];
-    return transposedVec;
-}
+//***************************************************************************************************//
+//******************************* MAIN FUNCTION *****************************************************//
+//***************************************************************************************************//
 
-
-std::vector<std::vector<int>> getLineItemData() {
-    std::string filename = "/home/harish/Documents/lineitem/lineitem.tbl";
-
+int main(void)
+{
+//    get the table content as 2D vector
     std::vector<std::vector<int>> lineitemData;
+    lineitemData = getLineItemData();
 
-    std::vector<int> rowVector;
+    // transpose the table data to read in column format
+    std::vector<std::vector<int>> transposedVec = getTransposedVector(lineitemData);
 
-    std::ifstream lineitemFile(filename);
+    // send the column data necessary for the query - this hardcoding will be replaced by parser
+    std::vector<int> columndata = transposedVec[8];
 
-/*    if(!lineitemFile.is_open())
-        throw std::runtime_error("could not open file");*/
-
-    std::string row;
-    std::string values;
-
-    while (lineitemFile.good()) {
-        std::getline(lineitemFile, row);
-        std::stringstream ss(row);
-        int count = 0;
-        while (std::getline(ss,values,'|')){
-            if(count < 8 or (count >=10 and count <=12)){
-                if(count >= 4 and count <=7) {
-                    int val = std::stof(values) * 100;
-                    rowVector.push_back(val);
-                }
-                else if(count >=10 and count <=12){
-                    values.erase(remove(values.begin(), values.end(), '-'), values.end());
-                    rowVector.push_back(std::stoi(values));
-                }
-                else{
-                    rowVector.push_back(std::stoi(values));
-                }
-            }
-            count++;
-        }
-        lineitemData.push_back(rowVector);
-        rowVector.clear();
-    }
-    return lineitemData;
+    filter_arrayfire(columndata);
+    sort_arrayfire(columndata);
+    return 0;
 }
+
+
 
 
 
