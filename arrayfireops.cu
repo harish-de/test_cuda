@@ -67,3 +67,28 @@ void join_arrayfire(std::vector<int> lhs, std::vector<int> rhs){
 
     af::print("join", joinResult);
 }
+
+void multVec_arrayfire(std::vector<int> lhs, std::vector<int> rhs){
+    int* hostLHS = &lhs[0];
+    int* hostRHS = &rhs[0];
+
+    // copy host data to device
+    af::array deviceLHS((dim_t)lhs.size(),hostLHS);
+    af::array deviceRHS((dim_t)rhs.size(),hostRHS);
+    af::array result((dim_t)lhs.size());
+
+    result = af::operator*(deviceLHS,deviceRHS);
+
+    af::print("multVec", result);
+}
+
+void sumaggreg_groupby_arrayfire(std::vector<int> keyCol, std::vector<int> valCol){
+    int* keys = &keyCol[0];
+    int* vals = &valCol[0];
+
+    //copy host to device
+    af::array deviceKeys((dim_t)keyCol.size(), keys);
+    af::array deviceColumnValues((dim_t)valCol.size(),vals);
+
+    //sumByKey arrayfire function here
+}

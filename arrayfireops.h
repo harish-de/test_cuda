@@ -11,3 +11,4 @@ void filter_arrayfire(std::vector<int> columndata);
 void sort_arrayfire(std::vector<int> columndata);
 void and_arryfire(std::vector<int> lhs, std::vector<int> rhs); // lhs and rhs as 1/0 values
 void join_arrayfire(std::vector<int> lhs, std::vector<int> rhs);
+void multVec_arrayfire(std::vector<int> lhs, std::vector<int> rhs);
