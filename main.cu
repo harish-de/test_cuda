@@ -11,6 +11,9 @@
 #include <thrust/find.h>
 // End of Thrust libraries
 
+#include <chrono>
+using namespace std::chrono;
+
 // Begin of Arrayfire libraries
 #include <arrayfire.h>
 #include <af/array.h>
@@ -213,10 +216,42 @@ int main(void)
     std::vector<std::vector<int>> transposedVec = getTransposedVector(lineitemData);
 
     // send the column data necessary for the query - this hardcoding will be replaced by parser
-    std::vector<int> columndata = transposedVec[8];
+    std::vector<int> column_shipdate = transposedVec[8];
+    std::vector<int> column_discount = transposedVec[6];
+    std::vector<int> column_quantity = transposedVec[4];
 
-    filter_arrayfire(columndata);
-    sort_arrayfire(columndata);
+    af::array result1,result2,result3,result4,result5;
+    af::array temp;
+
+    auto start = high_resolution_clock::now();
+
+    result1 = filter_arrayfire(column_shipdate,"GE",19940101);
+    // write a buffer logic to check if the column data is already in device memory
+    // the logic could be to hold 'n' column data slots in map at a time
+    // or calculate the size of column data using sizeof(vec) and extend the map such that it is lesser than device memory
+    // when one of the case invalidates, evict the column data
+    result2 = filter_arrayfire(column_shipdate,"LE",19950101);
+    result3 = filter_arrayfire(column_discount,"GE",5);
+    result4 = filter_arrayfire(column_discount,"LE",7);
+    result5 = filter_arrayfire(column_quantity,"LT",24);
+
+    auto stop = high_resolution_clock::now();
+    auto duration = duration_cast<microseconds>(stop - start);
+
+    std::cout << "time taken for all predicates: " <<duration.count() << " microseconds" << std::endl;
+
+    start = high_resolution_clock::now();
+    temp = join_arrayfire(result1,result2);
+    temp = join_arrayfire(temp,result3);
+    temp = join_arrayfire(temp,result4);
+    temp = join_arrayfire(temp,result5);
+    stop = high_resolution_clock::now();
+    duration = duration_cast<microseconds>(stop - start);
+
+    std::cout << "time taken for all predicate conjunctions: " <<duration.count() << " microseconds" << std::endl;
+
+//    af::print("result", temp);
+
     return 0;
 }
 

@@ -7,17 +7,44 @@
 #include <arrayfire.h>
 #include <af/algorithm.h>
 
-void filter_arrayfire(std::vector<int> columndata){
+#include <chrono>
+using namespace std::chrono;
+
+af::array filter_arrayfire(std::vector<int> columndata,std::string op,int value){
 
     int* hostColumnDataToBeFiltered = &columndata[0];
 
     // copy host data to device
+    auto start = high_resolution_clock::now();
     af::array deviceColumnDataToBeFiltered((dim_t)columndata.size(), hostColumnDataToBeFiltered); // columndata.size() = number of tuples
+    auto stop = high_resolution_clock::now();
+    auto duration = duration_cast<microseconds>(stop - start);
 
+    std::cout << "Time taken for tranfer of data: "
+         << duration.count() << " microseconds" << std::endl;
+
+    af::array indexOut;
+//    af::print("data", deviceColumnDataToBeFiltered);
 //    af::array result = af::operator>>(deviceDate, 19940101);
-    af::array index = af::where(af::operator>(deviceColumnDataToBeFiltered, 19940101)); // operator (in method definition)
-                                                                // and value (in parameter 'rhs') is specified
-    af::print("result", index);
+    if (op == "GE"){
+        indexOut = af::where(af::operator>=(deviceColumnDataToBeFiltered, value));
+    }else if(op == "LE"){
+        indexOut = af::where(af::operator<=(deviceColumnDataToBeFiltered, value));
+    }else if(op == "LT"){
+        indexOut = af::where(af::operator<(deviceColumnDataToBeFiltered, value));
+    }
+    else if(op == "GT"){
+        indexOut = af::where(af::operator>(deviceColumnDataToBeFiltered, value));
+    }
+    else if(op == "EQ"){
+        indexOut = af::where(af::operator==(deviceColumnDataToBeFiltered, value));
+    }
+    else {
+        indexOut = af::where(af::operator!=(deviceColumnDataToBeFiltered, value));
+    }
+//    af::print("result", indexOut);
+    return indexOut;
+
 }
 
 void sort_arrayfire(std::vector<int> columndata){
@@ -39,7 +66,7 @@ void sort_arrayfire(std::vector<int> columndata){
     af::print("sorted_data",deviceSortedOutputData);
 }
 
-void and_arryfire(std::vector<int> lhs, std::vector<int> rhs){
+af::array and_arrayfire(std::vector<int> lhs, std::vector<int> rhs){
 
     int* hostLHS = &lhs[0];
     int* hostRHS = &rhs[0];
@@ -50,11 +77,15 @@ void and_arryfire(std::vector<int> lhs, std::vector<int> rhs){
     af::array result((dim_t)lhs.size());
 
     result = af::operator&(deviceLHS,deviceRHS);
-
-    af::print("logicalAND", result);
+    return result;
+//    af::print("logicalAND", result);
 }
 
-void join_arrayfire(std::vector<int> lhs, std::vector<int> rhs){
+af::array and_arrayfire(af::array lhs, af::array rhs){
+    return af::operator&(lhs,rhs);
+}
+
+af::array join_arrayfire(std::vector<int> lhs, std::vector<int> rhs){
 
     int* hostLHS = &lhs[0];
     int* hostRHS = &rhs[0];
@@ -66,6 +97,13 @@ void join_arrayfire(std::vector<int> lhs, std::vector<int> rhs){
     af::array joinResult = af::setIntersect(deviceLHS,deviceRHS);
 
     af::print("join", joinResult);
+    return joinResult;
+}
+
+af::array join_arrayfire(af::array lhs, af::array rhs){
+    af::array joinResult = af::setIntersect(lhs,rhs);
+//    af::print("join", joinResult);
+    return joinResult;
 }
 
 void multVec_arrayfire(std::vector<int> lhs, std::vector<int> rhs){
@@ -90,5 +128,8 @@ void sumaggreg_groupby_arrayfire(std::vector<int> keyCol, std::vector<int> valCo
     af::array deviceKeys((dim_t)keyCol.size(), keys);
     af::array deviceColumnValues((dim_t)valCol.size(),vals);
 
-    //sumByKey arrayfire function here
+    //sumByKey arrayfire function here cannot be implemented
+    //this function is valid from version 3.7 (this version needs cuda 10.*)
+    // but ours is version 3.5 with cuda 8.0, so implement the same alternatively
+
 }
