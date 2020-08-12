@@ -6,6 +6,8 @@ set(CMAKE_DEPENDS_LANGUAGES
 set(CMAKE_DEPENDS_CHECK_CUDA
   "/home/harish/CLionProjects/test_cuda/arrayfireops.cu" "/home/harish/CLionProjects/test_cuda/cmake-build-debug/CMakeFiles/test_cuda.dir/arrayfireops.cu.o"
   "/home/harish/CLionProjects/test_cuda/main.cu" "/home/harish/CLionProjects/test_cuda/cmake-build-debug/CMakeFiles/test_cuda.dir/main.cu.o"
+  "/home/harish/CLionProjects/test_cuda/predicate/predicate.cu" "/home/harish/CLionProjects/test_cuda/cmake-build-debug/CMakeFiles/test_cuda.dir/predicate/predicate.cu.o"
+  "/home/harish/CLionProjects/test_cuda/type_conversion/host_to_device.cu" "/home/harish/CLionProjects/test_cuda/cmake-build-debug/CMakeFiles/test_cuda.dir/type_conversion/host_to_device.cu.o"
   )
 set(CMAKE_CUDA_COMPILER_ID "NVIDIA")
 

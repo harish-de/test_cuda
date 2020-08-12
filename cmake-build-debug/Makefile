@@ -177,6 +177,60 @@ main.cu.s:
 	$(MAKE) -f CMakeFiles/test_cuda.dir/build.make CMakeFiles/test_cuda.dir/main.cu.s
 .PHONY : main.cu.s
 
+predicate/predicate.o: predicate/predicate.cu.o
+
+.PHONY : predicate/predicate.o
+
+# target to build an object file
+predicate/predicate.cu.o:
+	$(MAKE) -f CMakeFiles/test_cuda.dir/build.make CMakeFiles/test_cuda.dir/predicate/predicate.cu.o
+.PHONY : predicate/predicate.cu.o
+
+predicate/predicate.i: predicate/predicate.cu.i
+
+.PHONY : predicate/predicate.i
+
+# target to preprocess a source file
+predicate/predicate.cu.i:
+	$(MAKE) -f CMakeFiles/test_cuda.dir/build.make CMakeFiles/test_cuda.dir/predicate/predicate.cu.i
+.PHONY : predicate/predicate.cu.i
+
+predicate/predicate.s: predicate/predicate.cu.s
+
+.PHONY : predicate/predicate.s
+
+# target to generate assembly for a file
+predicate/predicate.cu.s:
+	$(MAKE) -f CMakeFiles/test_cuda.dir/build.make CMakeFiles/test_cuda.dir/predicate/predicate.cu.s
+.PHONY : predicate/predicate.cu.s
+
+type_conversion/host_to_device.o: type_conversion/host_to_device.cu.o
+
+.PHONY : type_conversion/host_to_device.o
+
+# target to build an object file
+type_conversion/host_to_device.cu.o:
+	$(MAKE) -f CMakeFiles/test_cuda.dir/build.make CMakeFiles/test_cuda.dir/type_conversion/host_to_device.cu.o
+.PHONY : type_conversion/host_to_device.cu.o
+
+type_conversion/host_to_device.i: type_conversion/host_to_device.cu.i
+
+.PHONY : type_conversion/host_to_device.i
+
+# target to preprocess a source file
+type_conversion/host_to_device.cu.i:
+	$(MAKE) -f CMakeFiles/test_cuda.dir/build.make CMakeFiles/test_cuda.dir/type_conversion/host_to_device.cu.i
+.PHONY : type_conversion/host_to_device.cu.i
+
+type_conversion/host_to_device.s: type_conversion/host_to_device.cu.s
+
+.PHONY : type_conversion/host_to_device.s
+
+# target to generate assembly for a file
+type_conversion/host_to_device.cu.s:
+	$(MAKE) -f CMakeFiles/test_cuda.dir/build.make CMakeFiles/test_cuda.dir/type_conversion/host_to_device.cu.s
+.PHONY : type_conversion/host_to_device.cu.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -192,6 +246,12 @@ help:
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
+	@echo "... predicate/predicate.o"
+	@echo "... predicate/predicate.i"
+	@echo "... predicate/predicate.s"
+	@echo "... type_conversion/host_to_device.o"
+	@echo "... type_conversion/host_to_device.i"
+	@echo "... type_conversion/host_to_device.s"
 .PHONY : help
 
 

@@ -7,6 +7,8 @@
 
 #endif //TEST_CUDA_ARRAYFIREOPS_H
 
+#include <af/array.h>
+
 af::array filter_arrayfire(std::vector<int> columndata,std::string op,int value);
 void sort_arrayfire(std::vector<int> columndata);
 af::array and_arrayfire(std::vector<int> lhs, std::vector<int> rhs); // lhs and rhs as 1/0 values

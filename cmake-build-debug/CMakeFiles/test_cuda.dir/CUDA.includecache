@@ -6,39 +6,21 @@
 
 #IncludeRegexTransform: 
 
-/home/harish/CLionProjects/test_cuda/arrayfireops.h
-
-/home/harish/CLionProjects/test_cuda/main.cu
-thrust/host_vector.h
--
-thrust/device_vector.h
--
-thrust/remove.h
--
-thrust/copy.h
--
-thrust/execution_policy.h
--
-thrust/find.h
--
-chrono
--
-arrayfire.h
+/home/harish/CLionProjects/test_cuda/predicate/predicate.cu
+vector
 -
 af/array.h
 -
-iostream
+arrayfire.h
 -
-fstream
+af/algorithm.h
 -
-sstream
+thrust/device_vector.h
 -
-algorithm
+thrust/copy.h
 -
-array
+chrono
 -
-arrayfireops.h
-/home/harish/CLionProjects/test_cuda/arrayfireops.h
 
 /opt/arrayfire-3/include/af/algorithm.h
 af/defines.h

@@ -79,6 +79,18 @@
 		<Unit filename="/home/harish/CLionProjects/test_cuda/main.cu">
 			<Option target="test_cuda"/>
 		</Unit>
+		<Unit filename="/home/harish/CLionProjects/test_cuda/predicate/predicate.cu">
+			<Option target="test_cuda"/>
+		</Unit>
+		<Unit filename="/home/harish/CLionProjects/test_cuda/predicate/predicate.h">
+			<Option target="test_cuda"/>
+		</Unit>
+		<Unit filename="/home/harish/CLionProjects/test_cuda/type_conversion/host_to_device.cu">
+			<Option target="test_cuda"/>
+		</Unit>
+		<Unit filename="/home/harish/CLionProjects/test_cuda/type_conversion/host_to_device.h">
+			<Option target="test_cuda"/>
+		</Unit>
 		<Unit filename="/home/harish/CLionProjects/test_cuda/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>

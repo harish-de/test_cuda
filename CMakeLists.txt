@@ -5,9 +5,16 @@ set(CMAKE_CUDA_STANDARD 14)
 #set(CUDA_NVCC_FLAGS "${CUDA_NVCC_FLAGS};--expt-extended-lambda;")
 
 FIND_PACKAGE(ArrayFire REQUIRED)
+
+find_package( Boost REQUIRED )
+
+include_directories(
+        ${BOOST_INCLUDE_DIRS}
+)
+
 INCLUDE_DIRECTORIES(${ArrayFire_INCLUDE_DIRS})
 
-add_executable(test_cuda main.cu arrayfireops.h arrayfireops.cu)
+add_executable(test_cuda main.cu arrayfireops.h arrayfireops.cu predicate/predicate.h predicate/predicate.cu type_conversion/host_to_device.h type_conversion/host_to_device.cu)
 
 TARGET_LINK_LIBRARIES(test_cuda ${ArrayFire_LIBRARIES})
 
